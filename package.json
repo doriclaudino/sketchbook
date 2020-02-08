@@ -54,6 +54,7 @@
     "start": "npm run develop",
     "serve": "gatsby build && gatsby serve",
     "serve2": "gatsby build --prefix-paths && gatsby serve",
+    "build2": "gatsby build --prefix-paths",
     "deploy": "git stash --include-untracked && git push origin master && gatsby build && node scripts/publish.js && git stash pop",
     "sketch": "node scripts/new-sketch.js"
   },
