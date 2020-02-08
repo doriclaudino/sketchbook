@@ -54,8 +54,10 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby build && gatsby serve",
+    "serve2": "gatsby build --prefix-paths && gatsby serve",
     "deploy": "git stash --include-untracked && git push origin master && gatsby build && node scripts/publish.js && git stash pop",
-    "sketch": "node scripts/new-sketch.js"
+    "sketch": "node scripts/new-sketch.js",
+    "deploy2": "gatsby build && gh-pages -d public"
   },
   "repository": "git@github.com:doriclaudino/sketchbook.git"
 }
