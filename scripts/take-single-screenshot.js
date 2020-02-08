@@ -24,6 +24,7 @@ const puppeteer = require('puppeteer'),
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('canvas')
+    await page.waitFor(1000)
 
     /** save the image */
     const canvasDataUrl = await page.evaluate(() => document.querySelector('canvas').toDataURL())
