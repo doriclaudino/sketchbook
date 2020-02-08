@@ -38,19 +38,24 @@ export default () => (
         padding-bottom: var(--spacing);
       `}
     >
-      <h2>About</h2>
+      <h2> About </h2>{" "}
       <Icon href="#main" label="Return to Sketchbook" icon="close" />
-    </div>
+    </div>{" "}
     <P>
-      This site presents semi-daily explorations of generative and procedural
-      art. The code is all available on{" "}
-      <Link href="https://github.com/arlodesign/sketchbook/">GitHub</Link>.
-    </P>
+      This site presents my hobby using p5js. The code is all available on{" "}
+      <Link href="https://github.com/arlodesign/sketchbook/"> GitHub </Link>.{" "}
+    </P>{" "}
     <P>
-      <Link href="https://arlo.me/">Arlo Bryan Guthrie</Link> often uses this
-      work to produce screenprints and other printed artwork. He might even
-      start selling it some day. He’s on{" "}
-      <Link href="https://www.instagram.com/arlodesign/">Instagram</Link>.
-    </P>
+      You can find me on{" "}
+      <Link href="https://www.linkedin.com/in/doriclaudino/"> linkedin </Link>{" "}
+      and{" "}
+      <Link href="https://www.instagram.com/doriclaudino/"> Instagram </Link>.
+    </P>{" "}
+    <P>
+      This is a fork from{" "}
+      <Link href="https://sketchbook.arlo.me/"> Arlo sketchbook</Link> you can
+      as well check his arts using p5.js on{" "}
+      <Link href="https://www.instagram.com/arlodesign/"> Instagram </Link>.
+    </P>{" "}
   </Footer>
 );

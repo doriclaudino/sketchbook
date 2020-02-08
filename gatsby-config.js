@@ -8,16 +8,16 @@ const icon = glob
 
 deasync(
   sharp(icon)
-    .resize(512, 512)
-    .toFile("src/images/icon.png")
+  .resize(512, 512)
+  .toFile("src/images/icon.png")
 );
 
 module.exports = {
   siteMetadata: {
-    title: `sketchbook.arlo.me`,
+    title: `doriclaudino sketchbook`,
     description: `Experiments with generative art`,
-    author: `@arlodesign`,
-    siteUrl: "https://sketchbook.arlo.me",
+    author: `@doriclaudino`,
+    siteUrl: "https://doriclaudino.github.io/sketchbook/",
     sketchesPerIndexPage: 12,
   },
   plugins: [
