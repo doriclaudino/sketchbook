@@ -22,7 +22,7 @@ export default ({ sketch, path, description }) => (
       const sketchIndex = sketches.edges.findIndex(
         edge => edge.node.path === path
       );
-      const { next, previous } = sketches.edges[sketchIndex];
+      const { next, previous } = sketches.edges[sketchIndex] || {};
 
       return (
         <Layout>
