@@ -7,6 +7,7 @@ import Header from "~components/header";
 import Icon from "~components/icon";
 import Sketch from "~components/sketch";
 import SketchTitle from "~components/sketch-title";
+import SketchControls from "~components/sketch-controls";
 import sketchTitle from "~util/sketch-title";
 
 export default ({ sketch, path, description }) => (
@@ -30,7 +31,6 @@ export default ({ sketch, path, description }) => (
             ogImage={image ? image.node.childImageSharp.og.src : null}
             twitterImage={image ? image.node.childImageSharp.twitter.src : null}
           />
-
           <Header>
             <h1
               css={css`
@@ -39,8 +39,8 @@ export default ({ sketch, path, description }) => (
                 white-space: nowrap;
               `}
             >
-              <SketchTitle path={path} />
-            </h1>
+              <SketchTitle path={path} />{" "}
+            </h1>{" "}
             <Icon
               to={`/#sketch-${sketchTitle(path)}`}
               label="Back to Index"
@@ -48,20 +48,19 @@ export default ({ sketch, path, description }) => (
             />
             <Icon to={next && next.path} icon="left" />
             <Icon to={previous && previous.path} icon="right" />
-          </Header>
+          </Header>{" "}
           <main>
-            <Sketch sketch={sketch} />
-
+            <Sketch sketch={sketch} /> <SketchControls />
             {description && (
               <p
                 css={css`
                   padding: var(--spacing);
                 `}
               >
-                {description}
+                {description}{" "}
               </p>
-            )}
-          </main>
+            )}{" "}
+          </main>{" "}
         </Layout>
       );
     }}

@@ -108,19 +108,19 @@ const sketch = function (p) {
     colorPicker2 = p.createColorPicker(color2);
     colorPicker1 = p.createColorPicker(color1);
     colorPicker3 = p.createColorPicker(color3);
-    colorPicker1.parent('main');
-    colorPicker2.parent('main');
-    colorPicker3.parent('main');
+    colorPicker1.parent('sketch-controls');
+    colorPicker2.parent('sketch-controls');
+    colorPicker3.parent('sketch-controls');
 
     rotationSpeedSlider = p.createSlider(-1, 1, 0.5, 0.0001);
     rotationSpeedP = p.createP(`${rotationSpeedSlider.value()} rotation speed`)
-    rotationSpeedSlider.parent('main');
-    rotationSpeedP.parent('main');
+    rotationSpeedSlider.parent('sketch-controls');
+    rotationSpeedP.parent('sketch-controls');
 
     rotationSpeedSliderPanel = p.createSlider(-1, 1, 0, 0.0001);
     rotationSpeedPPanel = p.createP(`${rotationSpeedSliderPanel.value()} rotation speed`)
-    rotationSpeedSliderPanel.parent('main');
-    rotationSpeedPPanel.parent('main');
+    rotationSpeedSliderPanel.parent('sketch-controls');
+    rotationSpeedPPanel.parent('sketch-controls');
 
     // p.createLoop(DURATION, {
     //  gif: RENDER ? { render: false, open: true } : false,
@@ -180,5 +180,5 @@ export default ({
   path = {
     location.pathname
   }
-  description = "diamonds illusion on enter in the new" / >
+  description = "it create illusions of squares when the diamonds cross the background with the same color" / >
 );
