@@ -17,7 +17,7 @@ module.exports = {
     title: `doriclaudino sketchbook`,
     description: `Experiments with generative art`,
     author: `@doriclaudino`,
-    siteUrl: "https://doriclaudino.github.io/sketchbook/",
+    siteUrl: "https://doriclaudino.github.io/",
     sketchesPerIndexPage: 12,
   },
   plugins: [
@@ -54,5 +54,5 @@ module.exports = {
     `gatsby-plugin-client-side-redirect`,
     `gatsby-plugin-emotion`,
   ],
-  pathPrefix: `/assets`,
+  pathPrefix: "/sketchbook",
 };

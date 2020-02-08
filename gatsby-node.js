@@ -7,11 +7,17 @@
 const path = require("path");
 const rss = require("rss");
 const fs = require("fs");
-const { promisify } = require("util");
+const {
+  promisify
+} = require("util");
 
 const writeFile = promisify(fs.writeFile);
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+exports.onCreateWebpackConfig = ({
+  stage,
+  loaders,
+  actions
+}) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -25,19 +31,23 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
       module: {
-        rules: [
-          {
-            test: /p5/,
-            use: loaders.null(),
-          },
-        ],
+        rules: [{
+          test: /p5/,
+          use: loaders.null(),
+        }, ],
       },
     });
   }
 };
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions;
+exports.createPages = ({
+  graphql,
+  actions
+}) => {
+  const {
+    createPage,
+    createRedirect
+  } = actions;
 
   return graphql(`
     {
@@ -90,7 +100,9 @@ exports.createPages = ({ graphql, actions }) => {
     } = result.data.site.siteMetadata;
 
     // redirects
-    sketches.forEach(({ node }) => {
+    sketches.forEach(({
+      node
+    }) => {
       const sketchTitle = node.relativePath
         .replace(`.${node.extension}`, "")
         .replace(/\//g, "-");
@@ -113,7 +125,9 @@ exports.createPages = ({ graphql, actions }) => {
         feed_url: `${siteUrl}/feed.rss`,
         site_url: siteUrl,
       });
-      images.slice(0, 12).forEach(({ node }) => {
+      images.slice(0, 12).forEach(({
+        node
+      }) => {
         const sketchTitle = node.relativePath
           .replace(`.${node.extension}`, "")
           .replace(/\//g, "-");
@@ -131,7 +145,7 @@ exports.createPages = ({ graphql, actions }) => {
           },
         });
       });
-      await writeFile("./public/feed.rss", feed.xml(), "utf8");
+      //await writeFile("./public/feed.rss", feed.xml(), "utf8");
     }
   });
 };
