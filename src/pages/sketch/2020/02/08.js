@@ -2,7 +2,7 @@ import React from "react";
 import SketchLayout from "~components/sketch-layout";
 // import "p5.createloop";
 
-const sketch = function (p) {
+const sketch = function(p) {
   const RENDER = p.getURLParams().render;
   // const DURATION = 20;
   const RATE = 30;
@@ -10,8 +10,8 @@ const sketch = function (p) {
   const colors = {
     brown: "#341C09",
     mustard: "#F3A914",
-    niceRed: "#E34C43"
-  }
+    niceRed: "#E34C43",
+  };
   let rotationSpeedSlider;
   let rotationSpeedP;
   let rotationSpeedSliderPanel = 0;
@@ -29,9 +29,16 @@ const sketch = function (p) {
   let speed1;
   let speed2;
 
-  const toSeconds = (value, decimals) => decimals ? (toFrameRate(value) * 60).toFixed(decimals) : toFrameRate(value) * 60
-  const toFrameRate = (value, decimals) => decimals ? (value / p.getFrameRate()).toFixed(decimals) : value / p.getFrameRate()
-  const getSpeedStats = (value) => `${value}speed ${toFrameRate(value,2)}°/frame  ${toSeconds(value,2)}°/s`
+  const toSeconds = (value, decimals) =>
+    decimals
+      ? (toFrameRate(value) * 60).toFixed(decimals)
+      : toFrameRate(value) * 60;
+  const toFrameRate = (value, decimals) =>
+    decimals
+      ? (value / p.getFrameRate()).toFixed(decimals)
+      : value / p.getFrameRate();
+  const getSpeedStats = value =>
+    `${value}speed ${toFrameRate(value, 2)}°/frame  ${toSeconds(value, 2)}°/s`;
 
   const backgroundSquare = (size, rotation, color = colors.purple) => {
     p.push();
@@ -98,7 +105,7 @@ const sketch = function (p) {
     return altura;
   };
 
-  p.setup = function () {
+  p.setup = function() {
     p.pixelDensity(RENDER ? 2 : 1);
     p.frameRate(RATE);
     p.background(255);
@@ -108,19 +115,21 @@ const sketch = function (p) {
     colorPicker2 = p.createColorPicker(color2);
     colorPicker1 = p.createColorPicker(color1);
     colorPicker3 = p.createColorPicker(color3);
-    colorPicker1.parent('sketch-controls');
-    colorPicker2.parent('sketch-controls');
-    colorPicker3.parent('sketch-controls');
+    colorPicker1.parent("sketch-controls");
+    colorPicker2.parent("sketch-controls");
+    colorPicker3.parent("sketch-controls");
 
     rotationSpeedSlider = p.createSlider(-1, 1, 0.5, 0.0001);
-    rotationSpeedP = p.createP(`${rotationSpeedSlider.value()} rotation speed`)
-    rotationSpeedSlider.parent('sketch-controls');
-    rotationSpeedP.parent('sketch-controls');
+    rotationSpeedP = p.createP(`${rotationSpeedSlider.value()} rotation speed`);
+    rotationSpeedSlider.parent("sketch-controls");
+    rotationSpeedP.parent("sketch-controls");
 
     rotationSpeedSliderPanel = p.createSlider(-1, 1, 0, 0.0001);
-    rotationSpeedPPanel = p.createP(`${rotationSpeedSliderPanel.value()} rotation speed`)
-    rotationSpeedSliderPanel.parent('sketch-controls');
-    rotationSpeedPPanel.parent('sketch-controls');
+    rotationSpeedPPanel = p.createP(
+      `${rotationSpeedSliderPanel.value()} rotation speed`
+    );
+    rotationSpeedSliderPanel.parent("sketch-controls");
+    rotationSpeedPPanel.parent("sketch-controls");
 
     // p.createLoop(DURATION, {
     //  gif: RENDER ? { render: false, open: true } : false,
@@ -128,23 +137,22 @@ const sketch = function (p) {
     // });
   };
 
-  p.draw = function () {
+  p.draw = function() {
     /** update colors */
-    color1 = colorPicker1.value()
-    color2 = colorPicker2.value()
-    color3 = colorPicker3.value()
+    color1 = colorPicker1.value();
+    color2 = colorPicker2.value();
+    color3 = colorPicker3.value();
 
     /** update speed values */
-    speed1 = rotationSpeedSlider.value()
-    speed2 = rotationSpeedSliderPanel.value()
-
+    speed1 = rotationSpeedSlider.value();
+    speed2 = rotationSpeedSliderPanel.value();
 
     /** resize panels on background twices bigger than canvas */
-    size = p.height * 2
+    size = p.height * 2;
 
     /** update texts */
-    rotationSpeedP.elt.innerText = getSpeedStats(speed1)
-    rotationSpeedPPanel.elt.innerText = getSpeedStats(speed2)
+    rotationSpeedP.elt.innerText = getSpeedStats(speed1);
+    rotationSpeedPPanel.elt.innerText = getSpeedStats(speed2);
 
     /** move everything on center of our canva */
     p.translate(p.width / 2, p.height / 2);
@@ -155,7 +163,6 @@ const sketch = function (p) {
     /** add our left/right panels*/
     leftPanel(size, panelRotation, color3);
     rightPanel(size, panelRotation, color2);
-
 
     /** diamonds on center */
     diamond(60, 60, color3, initialRotations[0] + starRotation);
@@ -171,14 +178,10 @@ const sketch = function (p) {
   };
 };
 
-export default ({
-  location
-}) => ( <
-  SketchLayout sketch = {
-    sketch
-  }
-  path = {
-    location.pathname
-  }
-  description = "it create illusions of squares when the diamonds cross the background with the same color" / >
+export default ({ location }) => (
+  <SketchLayout
+    sketch={sketch}
+    path={location.pathname}
+    description="it create illusions of squares when the diamonds cross the background with the same color"
+  />
 );
