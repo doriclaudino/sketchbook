@@ -1,8 +1,8 @@
 {
   "name": "sketchbook",
   "private": true,
-  "description": "Experiments with generative art",
-  "author": "Arlo Bryan Guthrie <mail@arlo.me>",
+  "description": "Experiments with p5js",
+  "author": "dori claudino <dori.claudino@gmail.com>",
   "engines": {
     "node": "^12",
     "npm": "^6"
@@ -57,5 +57,5 @@
     "deploy": "git stash --include-untracked && git push origin master && gatsby build && node scripts/publish.js && git stash pop",
     "sketch": "node scripts/new-sketch.js"
   },
-  "repository": "git@github.com:arlodesign/sketchbook.git"
+  "repository": "git@github.com:doriclaudino/sketchbook.git"
 }
