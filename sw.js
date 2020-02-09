@@ -27,26 +27,26 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-88beac42ab8383a73fcc.js"
+    "url": "webpack-runtime-043dbee4c37570f8d306.js"
   },
   {
-    "url": "styles.b4da03394dc49308e9dc.css"
+    "url": "styles.9d991f23ecb7099b97a3.css"
   },
   {
-    "url": "styles-b109dfb0e53aeba16814.js"
+    "url": "styles-1927a4282f36c8216ae4.js"
   },
   {
-    "url": "commons-43fc098e28096a66c6cc.js"
+    "url": "commons-f5d1e3e75a608af9b572.js"
   },
   {
-    "url": "app-82b0dcb84dc9c5594e3f.js"
+    "url": "app-0c8f63206d94b767c01d.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-f3f35f6ef3789022665d.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "9957f638f7635cd8da401ecfe6a04afa"
+    "revision": "134b7f0f1ed989abf366fba391a5efeb"
   },
   {
     "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
@@ -142,12 +142,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/sketchbook`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-82b0dcb84dc9c5594e3f.js`))) {
+  if (!resources || !(await caches.match(`/sketchbook/app-0c8f63206d94b767c01d.js`))) {
     return await fetch(event.request)
   }
 
@@ -160,7 +160,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/sketchbook/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
