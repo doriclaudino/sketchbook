@@ -54,5 +54,5 @@ module.exports = {
     `gatsby-plugin-client-side-redirect`,
     `gatsby-plugin-emotion`,
   ],
-  pathPrefix: "/sketchbook",
+  pathPrefix: `/sketchbook`
 };
