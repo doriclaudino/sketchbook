@@ -2,21 +2,12 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const SketchWrapper = styled.div`
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  height: 0;
-  padding: 0 0 127.27272727%;
+  min-height: 100px;
+  min-width: 100px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 
-  & > canvas {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-  }
 `;
 
 class Sketch extends React.Component {
