@@ -48,16 +48,15 @@
   },
   "license": "AGPL-3.0",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "serve": "gatsby build --prefix-paths && gatsby serve --prefix-paths",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
-    "serve": "gatsby build && gatsby serve",
-    "serve2": "gatsby build --prefix-paths && gatsby serve --prefix-paths",
-    "deploy": "git stash --include-untracked && git push origin master && gatsby build && node scripts/publish.js && git stash pop",
-    "sketch": "node scripts/new-sketch.js",
-    "deploy2": "gatsby build && gh-pages -d public",
-    "public": "gh-pages -d public"
+    "start": "npm run develop",    
+    "deploy3": "git stash --include-untracked && git push origin master && gatsby build && node scripts/publish.js && git stash pop",
+    "sketch": "node scripts/new-sketch.js",    
+    "public": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "repository": "git@github.com:doriclaudino/sketchbook.git"
 }
