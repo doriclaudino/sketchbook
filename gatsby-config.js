@@ -8,8 +8,8 @@ const icon = glob
 
 deasync(
   sharp(icon)
-  .resize(512, 512)
-  .toFile("src/images/icon.png")
+    .resize(512, 512)
+    .toFile("src/images/icon.png")
 );
 
 module.exports = {
@@ -54,5 +54,5 @@ module.exports = {
     `gatsby-plugin-client-side-redirect`,
     `gatsby-plugin-emotion`,
   ],
-  pathPrefix: "/assets",
+  pathPrefix: "/sketchbook",
 };
