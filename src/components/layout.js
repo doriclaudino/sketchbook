@@ -8,6 +8,7 @@ import Footer from "~components/footer";
 const Layout = ({ children, navigation, isSketch }) => (
   <>
     <Helmet>
+      <script src="https://cdn.jsdelivr.net/npm/quicksettings@latest/quicksettings.min.js" />
       <link
         rel="alternate"
         type="application/rss+xml"

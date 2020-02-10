@@ -4,10 +4,20 @@ import p5 from "p5";
 // import "p5.createloop";
 
 const sketch = function(p = new p5()) {
-  let lineSpace, theta, amp, wait, dx, speed, lineHeight, total;
+  let lineSpace,
+    theta,
+    amp,
+    wait,
+    dx,
+    speed,
+    lineHeight,
+    total,
+    showDistances,
+    settings;
 
   p.setup = function() {
     p.createCanvas(p.min(1200, p.displayWidth), p.min(1200, p.displayHeight));
+
     lineSpace = 2; //space between waves
     lineHeight = 4;
     theta = 0.0;
@@ -16,6 +26,16 @@ const sketch = function(p = new p5()) {
     speed = 0.01; //growth wave speed
     dx = (p.TWO_PI / wait) * lineSpace;
     total = (amp * 2) / (lineSpace + lineHeight);
+    showDistances = false;
+
+    // if (window && window.QuickSettings) {
+    //   settings = QuickSettings.create();
+    //   settings.addBoolean(
+    //     "show Distances",
+    //     showDistances,
+    //     x => (showDistances = x)
+    //   );
+    // }
   };
 
   p.windowResized = function() {
@@ -66,7 +86,7 @@ const sketch = function(p = new p5()) {
       p.fill(255, 75, rmapcolor - 75);
 
       //every second
-      //if (i % 2) p.text(p.round(dcolor), top.x2 + 30, top.y2);
+      if (showDistances && i % 2) p.text(p.round(dcolor), top.x2 + 30, top.y2);
 
       p.quad(
         bottom.x1,
