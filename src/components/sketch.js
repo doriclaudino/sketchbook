@@ -2,12 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const SketchWrapper = styled.div`
-  min-height: 100px;
-  min-width: 100px;
   display: flex;
   flex-flow: column;
   align-items: center;
-
 `;
 
 class Sketch extends React.Component {
