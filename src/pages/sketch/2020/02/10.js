@@ -7,18 +7,23 @@ const sketch = function(p = new p5()) {
   let lineSpace, theta, amp, wait, dx, speed, lineHeight, total;
 
   p.setup = function() {
-    p.createCanvas(1200, 1200);
+    p.createCanvas(p.min(1200, p.displayWidth), p.min(1200, p.displayHeight));
     lineSpace = 2; //space between waves
     lineHeight = 4;
     theta = 0.0;
-    amp = 400.0; //amplitude of the wave, and radius of circle
+    amp = p.height / 4; //amplitude of the wave, and radius of circle
     wait = 500.0; //wave offset
     speed = 0.01; //growth wave speed
     dx = (p.TWO_PI / wait) * lineSpace;
     total = (amp * 2) / (lineSpace + lineHeight);
   };
 
+  p.windowResized = function() {
+    p.resizeCanvas(p.displayWidth, p.displayHeight);
+  };
+
   p.draw = function() {
+    amp = p.height / 4;
     p.background(0);
     p.noStroke();
     p.translate(p.width / 2, p.height / 2);
