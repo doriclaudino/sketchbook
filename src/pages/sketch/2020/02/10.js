@@ -13,11 +13,22 @@ const sketch = function(p = new p5()) {
     lineHeight,
     total,
     showDistances,
-    settings;
+    settings,
+    bgColor,
+    color1,
+    color2,
+    canvasSize;
+
+  p.getSettings = function() {
+    return settings;
+  };
 
   p.setup = function() {
-    p.createCanvas(p.min(1200, p.displayWidth), p.min(1200, p.displayHeight));
-
+    canvasSize = 1200;
+    p.createCanvas(
+      p.min(canvasSize, p.windowWidth),
+      p.min(canvasSize, p.windowHeight)
+    );
     lineSpace = 2; //space between waves
     lineHeight = 4;
     theta = 0.0;
@@ -27,24 +38,71 @@ const sketch = function(p = new p5()) {
     dx = (p.TWO_PI / wait) * lineSpace;
     total = (amp * 2) / (lineSpace + lineHeight);
     showDistances = false;
+    bgColor = "#000000";
+    color1 = "#ff0000";
+    color2 = "#1a42e6";
+    setTimeout(() => {
+      createPanel();
+    }, 1000);
+  };
 
-    // if (window && window.QuickSettings) {
-    //   settings = QuickSettings.create();
-    //   settings.addBoolean(
-    //     "show Distances",
-    //     showDistances,
-    //     x => (showDistances = x)
-    //   );
-    // }
+  const createPanel = () => {
+    let interval = setInterval(() => {
+      if (window && window.QuickSettings) {
+        clearInterval(interval);
+        settings = QuickSettings.create(
+          50,
+          50,
+          "playground",
+          document.querySelector("#main > main")
+        )
+          .setDraggable(true)
+          .setCollapsible(true)
+          .addBoolean("show_distances", showDistances, x => (showDistances = x))
+          .addRange("canvas_size", 1, p.windowWidth, canvasSize, 1, x => {
+            canvasSize = x;
+            p.windowResized();
+          })
+          .addRange(
+            "line_space",
+            0.01,
+            10,
+            lineSpace,
+            0.01,
+            x => (lineSpace = x)
+          )
+          .addRange(
+            "line_height",
+            0.01,
+            10,
+            lineHeight,
+            0.01,
+            x => (lineHeight = x)
+          )
+          .addRange("wave_wait", 100, 10000, wait, 1, x => {
+            wait = x;
+            dx = (p.TWO_PI / wait) * lineSpace;
+          })
+          .addRange("speed", 0.01, 3, speed, 0.01, x => (speed = x))
+          .addColor("bgColor", bgColor, x => (bgColor = x))
+          .addColor("color1", color1, x => (color1 = x))
+          .addColor("color2", color2, x => (color2 = x));
+      }
+    }, 20);
   };
 
   p.windowResized = function() {
-    p.resizeCanvas(p.displayWidth, p.displayHeight);
+    p.resizeCanvas(
+      p.min(canvasSize, p.windowWidth),
+      p.min(canvasSize, p.windowHeight)
+    );
+    settings.setRangeParameters("canvas_size", 1, p.windowWidth, 1);
   };
 
   p.draw = function() {
     amp = p.height / 4;
-    p.background(0);
+    total = (amp * 2) / (lineSpace + lineHeight);
+    p.background(bgColor);
     p.noStroke();
     p.translate(p.width / 2, p.height / 2);
     p.textSize(16);
@@ -80,10 +138,12 @@ const sketch = function(p = new p5()) {
         p.max(bottom.x1, bottom.x2 + offsetX),
         bottom.y2
       );
-      let rmapcolor = p.map(dcolor, 0, amp * 2, 255, 0);
-
+      let rmapcolor = p.map(dcolor, 0, amp * 2, 0, 1);
+      let color1Rgb = p.color(color1);
+      let color2Rgb = p.color(color2);
+      let lerpColor = p.lerpColor(color1Rgb, color2Rgb, rmapcolor);
       //more red, little green, more blue
-      p.fill(255, 75, rmapcolor - 75);
+      p.fill(lerpColor);
 
       //every second
       if (showDistances && i % 2) p.text(p.round(dcolor), top.x2 + 30, top.y2);
