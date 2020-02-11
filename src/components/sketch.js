@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import "p5.createloop";
 
 const SketchWrapper = styled.div`
   display: flex;
@@ -29,8 +30,13 @@ class Sketch extends React.Component {
   }
 
   removeSettings = () => {
-    let settings = this.getSettings && this.getSettings();
-    settings && settings.destroy();
+    try {
+      let elements = document.querySelectorAll("div#null.qs_main");
+      elements.forEach(e => e.parentElement.removeChild(e));
+      this.getSettings && this.getSettings().destroy();
+    } catch (error) {
+      console.log(`sketch doens't define settings`);
+    }
   };
 
   render() {
