@@ -1,7 +1,6 @@
 import React from "react";
 import SketchLayout from "~components/sketch-layout";
 import p5 from "p5";
-// import "p5.createloop";
 
 const sketch = function(p = new p5()) {
   let lineSpace,
@@ -17,7 +16,9 @@ const sketch = function(p = new p5()) {
     bgColor,
     color1,
     color2,
-    canvasSize;
+    canvasSize,
+    gifDuration,
+    loopProgress;
 
   p.getSettings = function() {
     return settings;
@@ -41,6 +42,7 @@ const sketch = function(p = new p5()) {
     bgColor = "#000000";
     color1 = "#ff0000";
     color2 = "#1a42e6";
+    gifDuration = 5;
     setTimeout(() => {
       createPanel();
     }, 1000);
@@ -53,11 +55,11 @@ const sketch = function(p = new p5()) {
         settings = QuickSettings.create(
           50,
           50,
-          "playground",
+          "controls",
           document.querySelector("#main > main")
         )
-          .setDraggable(true)
           .setCollapsible(true)
+          .setDraggable(true)
           .addBoolean("show_distances", showDistances, x => (showDistances = x))
           .addRange("canvas_size", 1, p.windowWidth, canvasSize, 1, x => {
             canvasSize = x;
@@ -86,9 +88,25 @@ const sketch = function(p = new p5()) {
           .addRange("speed", 0.01, 3, speed, 0.01, x => (speed = x))
           .addColor("bgColor", bgColor, x => (bgColor = x))
           .addColor("color1", color1, x => (color1 = x))
-          .addColor("color2", color2, x => (color2 = x));
+          .addColor("color2", color2, x => (color2 = x))
+          .addRange(
+            "gif duration (s)",
+            1,
+            180,
+            gifDuration,
+            1,
+            x => (gifDuration = x)
+          )
+          .addButton("save_gif", saveGif);
       }
+      settings.collapse();
     }, 20);
+  };
+
+  const saveGif = () => {
+    let loop = p.createLoop(gifDuration, {
+      gif: { render: false, open: false, download: true },
+    });
   };
 
   p.windowResized = function() {
