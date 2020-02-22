@@ -28,6 +28,7 @@
     "pack-spheres": "^1.0.4",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
+    "react-burger-menu": "^2.6.13",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.0"
   },
@@ -53,9 +54,9 @@
     "serve": "gatsby build --prefix-paths && gatsby serve --prefix-paths",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",    
+    "start": "npm run develop",
     "deploy3": "git stash --include-untracked && git push origin master && gatsby build && node scripts/publish.js && git stash pop",
-    "sketch": "node scripts/new-sketch.js",    
+    "sketch": "node scripts/new-sketch.js",
     "public": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "repository": "git@github.com:doriclaudino/sketchbook.git"

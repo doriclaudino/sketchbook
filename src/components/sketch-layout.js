@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StaticQuery, graphql } from "gatsby";
 import { css } from "@emotion/core";
 import Layout from "~components/layout";
@@ -9,6 +9,7 @@ import Sketch from "~components/sketch";
 import SketchTitle from "~components/sketch-title";
 import SketchControls from "~components/sketch-controls";
 import sketchTitle from "~util/sketch-title";
+import Menu from "~components/menu";
 
 export default ({ sketch, path, description }) => (
   <StaticQuery
@@ -23,15 +24,16 @@ export default ({ sketch, path, description }) => (
         edge => edge.node.path === path
       );
       const { next, previous } = sketches.edges[sketchIndex] || {};
+      const [isOpen, setIsOpen] = useState(false);
 
       return (
-        <Layout>
+        <Layout>                  
           <SEO
             title={sketchTitle(path)}
             ogImage={image ? image.node.childImageSharp.og.src : null}
             twitterImage={image ? image.node.childImageSharp.twitter.src : null}
           />
-          <Header>
+          <Header>           
             <h1
               css={css`
                 grid-area: c;
@@ -40,17 +42,22 @@ export default ({ sketch, path, description }) => (
               `}
             >
               <SketchTitle path={path} />{" "}
-            </h1>{" "}
-            <Icon
+            </h1>{" "}            
+            <div> 
+              <Icon icon="menu" onClick={()=>setIsOpen(!isOpen)}/>
+              <Icon
               to={`/#sketch-${sketchTitle(path)}`}
               label="Back to Index"
               icon="up"
-            />
+              />
+            </div>           
             <Icon to={next && next.path} icon="left" />
-            <Icon to={previous && previous.path} icon="right" />
+            <Icon to={previous && previous.path} icon="right" />            
           </Header>{" "}
           <main>
-            <Sketch sketch={sketch} /> <SketchControls />
+            <Menu isOpen={isOpen} onStateChange={({isOpen})=>setIsOpen(isOpen)}/> 
+            <Sketch sketch={sketch} /> 
+            <SketchControls />
             {description && (
               <p
                 css={css`
