@@ -20,10 +20,10 @@ export default ({ sketch, path, description }) => (
         )
       );
       const sketchIndex = sketches.edges.findIndex(
-        edge => edge.node.path === path
+        edge => edge.node.path === path.replace("/sketchbook", "")
       );
       const { next, previous } = sketches.edges[sketchIndex] || {};
-
+      
       return (
         <Layout>
           <SEO
