@@ -23,7 +23,7 @@ export default ({ sketch, path, description }) => (
         edge => edge.node.path === path.replace("/sketchbook", "")
       );
       const { next, previous } = sketches.edges[sketchIndex] || {};
-      
+
       return (
         <Layout>
           <SEO
@@ -41,6 +41,7 @@ export default ({ sketch, path, description }) => (
             >
               <SketchTitle path={path} />{" "}
             </h1>{" "}
+            <Icon icon="menu" onClick={() => console.log("menu clicked")} />
             <Icon
               to={`/#sketch-${sketchTitle(path)}`}
               label="Back to Index"
