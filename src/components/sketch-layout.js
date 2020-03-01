@@ -9,6 +9,8 @@ import Sketch from "~components/sketch";
 import SketchTitle from "~components/sketch-title";
 import SketchControls from "~components/sketch-controls";
 import sketchTitle from "~util/sketch-title";
+import MenuContext from "~components/menu-provider";
+import Menu from "~components/menu";
 
 export default ({ sketch, path, description }) => (
   <StaticQuery
@@ -41,7 +43,11 @@ export default ({ sketch, path, description }) => (
             >
               <SketchTitle path={path} />{" "}
             </h1>{" "}
-            <Icon icon="menu" onClick={() => console.log("menu clicked")} />
+            <MenuContext.Consumer>
+              {({ isOpen, toggleIsOpen }) => (
+                <Icon icon="menu" onClick={() => toggleIsOpen(!isOpen)} />
+              )}
+            </MenuContext.Consumer>
             <Icon
               to={`/#sketch-${sketchTitle(path)}`}
               label="Back to Index"
@@ -51,6 +57,7 @@ export default ({ sketch, path, description }) => (
             <Icon to={previous && previous.path} icon="right" />
           </Header>{" "}
           <main>
+            <Menu />
             <Sketch sketch={sketch} /> <SketchControls />
             {description && (
               <p
