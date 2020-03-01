@@ -43,16 +43,22 @@ export default ({ sketch, path, description }) => (
             >
               <SketchTitle path={path} />{" "}
             </h1>{" "}
-            <MenuContext.Consumer>
-              {({ isOpen, toggleIsOpen }) => (
-                <Icon icon="menu" onClick={() => toggleIsOpen(!isOpen)} />
-              )}
-            </MenuContext.Consumer>
-            <Icon
-              to={`/#sketch-${sketchTitle(path)}`}
-              label="Back to Index"
-              icon="up"
-            />
+            <div>
+              <Icon
+                to={`/#sketch-${sketchTitle(path)}`}
+                label="Back to Index"
+                icon="up"
+              />
+              <MenuContext.Consumer>
+                {({ isOpen, toggleIsOpen }) => (
+                  <Icon
+                    icon="menu"
+                    styles={{ opacity: 1 }}
+                    onClick={() => toggleIsOpen(!isOpen)}
+                  />
+                )}
+              </MenuContext.Consumer>
+            </div>
             <Icon to={next && next.path} icon="left" />
             <Icon to={previous && previous.path} icon="right" />
           </Header>{" "}
